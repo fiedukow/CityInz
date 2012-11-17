@@ -1,14 +1,15 @@
 #ifndef ROADGRAPHREADER_H
 #define ROADGRAPHREADER_H
 
-#include <string>
 #include "RoadGraph.h"
+
+#include <string>
 
 class RoadGraphReader
 {
 public:
   RoadGraphReader(const std::string& graphFilePath);
-  RoadGraph readRoadGraph();
+  RoadGraphPtr readRoadGraph();
 
 private:
   std::string graphFilePath;

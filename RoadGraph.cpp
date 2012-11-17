@@ -22,7 +22,7 @@ void RoadGraph::addVertex(VertexId id, GeoCoords coords)
   vertexes[id] = coords;
 }
 
-bool RoadGraph::addEdge(VertexId f, VertexId s)
+void RoadGraph::addEdge(VertexId f, VertexId s)
 {
   edges.push_back(Edge(f, s));
 }

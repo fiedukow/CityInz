@@ -3,13 +3,17 @@
 
 #include <map>
 #include <list>
+#include <memory>
 
 struct GeoCoords;
 struct Edge;
+class  RoadGraph;
 
-typedef unsigned long long VertexId;
+typedef long long VertexId;
 typedef std::map<VertexId, GeoCoords> VertexMap;
 typedef std::list<Edge> EdgesList;
+typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
+
 
 struct Edge
 {
@@ -31,7 +35,7 @@ class RoadGraph
 public:
   RoadGraph();
   void addVertex(VertexId id, GeoCoords coords);
-  bool addEdge(VertexId f, VertexId s);
+  void addEdge(VertexId f, VertexId s);
 
   VertexMap::const_iterator vertexBegin() const;
   VertexMap::const_iterator vertexEnd() const;

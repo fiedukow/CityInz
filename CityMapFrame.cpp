@@ -5,7 +5,7 @@ CityMapFrame::CityMapFrame(QWidget* parent)
 {
 }
 
-virtual void CityMapFrame::paintEvent(QPaintEvent *event)
+void CityMapFrame::paintEvent(QPaintEvent *event)
 {
 
 }
