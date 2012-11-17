@@ -5,10 +5,18 @@
 #include <list>
 
 struct GeoCoords;
+struct Edge;
 
 typedef unsigned long long VertexId;
 typedef std::map<VertexId, GeoCoords> VertexMap;
-typedef std::list<VertexId, VertexId> EdgesList;
+typedef std::list<Edge> EdgesList;
+
+struct Edge
+{
+  Edge(VertexId f, VertexId s);
+  const VertexId f;
+  const VertexId s;
+};
 
 struct GeoCoords
 {
@@ -23,7 +31,7 @@ class RoadGraph
 public:
   RoadGraph();
   void addVertex(VertexId id, GeoCoords coords);
-  bool addEdge(VertexId, VertexId);
+  bool addEdge(VertexId f, VertexId s);
 
   VertexMap::const_iterator vertexBegin() const;
   VertexMap::const_iterator vertexEnd() const;
