@@ -47,3 +47,52 @@ EdgesList::const_iterator RoadGraph::edgesEnd() const
   return edges.end();
 }
 
+const GeoCoords& RoadGraph::getVertexCoords(VertexId id) const
+{
+  VertexMap::const_iterator i = vertexes.find(id);
+  if (i != vertexes.end())
+    return i->second;
+
+  throw std::exception(); //TODO
+}
+
+GeoCoords RoadGraph::maxCoords() const
+{
+  double maxlat = 0, maxlon = 0;
+  for (VertexMap::const_iterator i = vertexes.begin(); i!= vertexes.end(); ++i)
+  {
+    const GeoCoords& c = i->second;
+    if (c.lat > maxlat) maxlat = c.lat;
+    if (c.lon > maxlon) maxlon = c.lon;
+  }
+  return GeoCoords(maxlat, maxlon);
+}
+
+
+void RoadGraph::normalize()
+{
+  double minlat = 91, minlon = 181;
+  for (VertexMap::const_iterator i = vertexes.begin(); i!= vertexes.end(); ++i)
+  {
+    const GeoCoords& c = i->second;
+    if (c.lat < minlat) minlat = c.lat;
+    if (c.lon < minlon) minlon = c.lon;
+  }
+
+  for (VertexMap::iterator i = vertexes.begin(); i!= vertexes.end(); ++i)
+  {
+    GeoCoords& c = i->second;
+    c.lat -= minlat;
+    c.lon -= minlon;
+  }
+}
+
+void RoadGraph::scale(double scale)
+{
+  for (VertexMap::iterator i = vertexes.begin(); i!= vertexes.end(); ++i)
+  {
+    GeoCoords& c = i->second;
+    c.lat *= scale;
+    c.lon *= scale;
+  }
+}

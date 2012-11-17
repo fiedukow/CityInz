@@ -1,12 +1,14 @@
 #include "CitiInz.h"
 #include "CityMapFrame.h"
+#include "RoadGraph.h"
 
 #include <QFrame>
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QTimer>
+#include <QScrollArea>
 
-CitiInz::CitiInz(QWidget *parent)
+CitiInz::CitiInz(RoadGraphPtr graph, QWidget *parent)
   : QMainWindow(parent)
 {
   QFrame* mainFrame = new QFrame(this);
@@ -14,9 +16,13 @@ CitiInz::CitiInz(QWidget *parent)
   QVBoxLayout* ly = new QVBoxLayout(mainFrame);
   ly->addWidget(new QLabel("Mapa warszawy", mainFrame));
 
-  drawFrame = new CityMapFrame(mainFrame);
+
+  QScrollArea* scrollable = new QScrollArea(mainFrame);
+  drawFrame = new CityMapFrame(scrollable, graph);
   drawFrame->setFrameStyle(QFrame::Box);
-  ly->addWidget(drawFrame);
+  drawFrame->setMinimumSize(5000, 5000);
+  scrollable->setWidget(drawFrame);
+  ly->addWidget(scrollable);
   ly->setStretch(1, 1);
 
   QTimer *timer = new QTimer(this);
