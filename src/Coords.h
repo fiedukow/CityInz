@@ -27,6 +27,9 @@ struct MetricCoords
 
   double x;
   double y;
+
+  static double mPerLonDegree;
+  static double mPerLatDegree;
 };
 
 

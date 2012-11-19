@@ -1,5 +1,8 @@
 #include "Coords.h"
 
+double MetricCoords::mPerLonDegree = 111322.22222222222;
+double MetricCoords::mPerLatDegree = 111132.94444444445;
+
 IntCoords::IntCoords(int x, int y)
   : x(x), y(y)
 {}
@@ -21,8 +24,9 @@ GeoCoords::GeoCoords(double lat, double lon)
 {}
 
 MetricCoords::MetricCoords(const GeoCoords& coords)
+  : x(coords.lon * mPerLonDegree),
+    y(coords.lat * mPerLatDegree)
 {
-
 }
 
 MetricCoords::MetricCoords(double x, double y)
