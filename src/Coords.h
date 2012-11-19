@@ -1,6 +1,10 @@
 #ifndef COORDS_H
 #define COORDS_H
 
+struct MetricCoords;
+struct GeoCoords;
+struct IntCoords;
+
 struct IntCoords
 {
   IntCoords(int x, int y);

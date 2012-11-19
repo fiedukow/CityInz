@@ -20,7 +20,7 @@ SOURCES += src/main.cpp\
            src/RoadGraph.cpp \
            src/Speed.cpp \
            src/PositionAtEdge.cpp \
-           src/Coords.cpp
+           src/Coords.cpp \
 
 HEADERS  += src/CitiInz.h \
             src/CityMapFrame.h \
@@ -28,4 +28,4 @@ HEADERS  += src/CitiInz.h \
             src/RoadGraph.h \
             src/Speed.h \
             src/PositionAtEdge.h \
-            src/Coords.h
+            src/Coords.h \

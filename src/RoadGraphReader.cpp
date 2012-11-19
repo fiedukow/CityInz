@@ -1,4 +1,5 @@
 #include "RoadGraphReader.h"
+#include "Coords.h"
 #include <fstream>
 #include <exception>
 
@@ -28,7 +29,7 @@ RoadGraphPtr RoadGraphReader::readRoadGraph()
     if (id >= 0)
     {
       inputFile >> lat >> lon;
-      result->addVertex(id, GeoCoords(lat, lon));
+      result->addVertex(id, MetricCoords(GeoCoords(lat, lon)));
     }
   }
 
@@ -40,8 +41,6 @@ RoadGraphPtr RoadGraphReader::readRoadGraph()
     inputFile >> beg >> end >> dist >> lanes >> speed;
     result->addEdge(beg, end);
   }
-
-  result->addRandomCar();
 
   return result;
 }

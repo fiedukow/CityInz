@@ -9,16 +9,16 @@ CityMapFrame::CityMapFrame(QWidget* parent, RoadGraphPtr graph)
 {
   time_t begin = time(NULL);
   graph->normalize();
-  graph->scale(10000);
+  //graph->scale(10000);
   //int maxLon = graph->maxLon();
-  GeoCoords maxCoords = graph->maxCoords();
-  int maxLat = maxCoords.lat;
-  int maxLon = maxCoords.lon;
-  img = QImage(maxLon, maxLat, QImage::Format_RGB32);
+  MetricCoords maxCoords = graph->maxCoords();
+  int maxY = maxCoords.y;
+  int maxX = maxCoords.x;
+  std::cout << maxX << " x " << maxY << std::endl;
+  img = QImage(maxX, maxY, QImage::Format_RGB32);
   QPainter painter(&img);
   //painter.setRenderHint(QPainter::Antialiasing);
-  for(int i = 0; i < 100; ++i)
-  {
+
   QPen pen(Qt::red);
   pen.setColor(QColor::fromRgb(0x7C, 0x41, 0x41));
   pen.setWidth(1);
@@ -48,15 +48,14 @@ CityMapFrame::CityMapFrame(QWidget* parent, RoadGraphPtr graph)
        i != graph->edgesEnd();
        ++i)
   {
-    const GeoCoords& f = graph->getVertexCoords(i->f);
-    const GeoCoords& s = graph->getVertexCoords(i->s);
+    const MetricCoords& f = graph->getVertexCoords(i->f);
+    const MetricCoords& s = graph->getVertexCoords(i->s);
     //std::cout << f.lon << ", " << f.lat << "; ";
     //std::cout << s.lon << ", " << s.lat << std::endl;
-    painter.drawLine(QPoint(static_cast<int>(f.lon),
-                            maxLat-static_cast<int>(f.lat)),
-                     QPoint(static_cast<int>(s.lon),
-                            maxLat-static_cast<int>(s.lat)));
-  }
+    painter.drawLine(QPoint(static_cast<int>(f.x),
+                            maxY-static_cast<int>(f.y)),
+                     QPoint(static_cast<int>(s.x),
+                            maxY-static_cast<int>(s.y)));
   }
 
   std::cout << "Time taken: " << time(NULL)-begin << std::endl;
