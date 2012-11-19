@@ -44,7 +44,7 @@ CityMapFrame::CityMapFrame(QWidget* parent, RoadGraphPtr graph)
     //painter.drawRect(static_cast<int>(c.lon), static_cast<int>(c.lat), 2, 2);
   }*/
 
-  for (EdgesVector::const_iterator i = graph->edgesBegin();
+  for (EdgesList::const_iterator i = graph->edgesBegin();
        i != graph->edgesEnd();
        ++i)
   {

@@ -4,7 +4,7 @@
 #include "Car.h"
 
 #include <map>
-#include <vector>
+#include <list>
 #include <memory>
 
 struct GeoCoords;
@@ -13,9 +13,9 @@ class  RoadGraph;
 
 typedef long long VertexId;
 typedef std::map<VertexId, GeoCoords> VertexMap;
-typedef std::vector<Edge> EdgesVector;
+typedef std::list<Edge> EdgesList;
 typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
-typedef std::vector<Car> CarsVector;
+typedef std::map<unsigned, Car> CarMap;
 
 struct Edge
 {
@@ -38,26 +38,22 @@ public:
   RoadGraph();
   void addVertex(VertexId id, GeoCoords coords);
   void addEdge(VertexId f, VertexId s);
-  void addRandomCar();
 
   VertexMap::const_iterator vertexBegin() const;
   VertexMap::const_iterator vertexEnd() const;
 
-  EdgesVector::const_iterator edgesBegin() const;
-  EdgesVector::const_iterator edgesEnd() const;
+  EdgesList::const_iterator edgesBegin() const;
+  EdgesList::const_iterator edgesEnd() const;
 
   const GeoCoords& getVertexCoords(VertexId id) const;
   GeoCoords maxCoords() const;
-
-  void timePassed(double secs);
 
   void normalize();
   void scale(double scale);
 
 private:
   VertexMap vertexes;
-  EdgesVector edges;
-  CarsVector cars;
+  EdgesList edges;
 };
 
 #endif // ROADGRAPH_H

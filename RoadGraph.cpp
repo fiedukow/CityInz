@@ -1,5 +1,4 @@
 #include "RoadGraph.h"
-#include <cstdlib>
 
 Edge::Edge(VertexId f, VertexId s)
   : f(f), s(s)
@@ -28,22 +27,6 @@ void RoadGraph::addEdge(VertexId f, VertexId s)
   edges.push_back(Edge(f, s));
 }
 
-void RoadGraph::addRandomCar()
-{
-  VertexId startEdge = edges[rand()%edges.size()];
-  int percentPassed = rand()%100;
-  double a = (startEdge.s.lat - startEdge.f.lat)
-            /(startEdge.s.lon - startEdge.f.lon);
-
-  double dx = startEdge.s.lon - startEdge.f.lon;
-  double dy = startEdge.s.lat - startEdge.f.lat;
-
-  GeoCoords coords(startEdge.f.lon + dx * percentPassed,
-                   startEdge.f.lat + a * dy * percentPassed);
-
-  cars.push_back(Car(startEdge, coords));
-}
-
 VertexMap::const_iterator RoadGraph::vertexBegin() const
 {
   return vertexes.begin();
@@ -54,12 +37,12 @@ VertexMap::const_iterator RoadGraph::vertexEnd() const
   return vertexes.end();
 }
 
-EdgesVector::const_iterator RoadGraph::edgesBegin() const
+EdgesList::const_iterator RoadGraph::edgesBegin() const
 {
   return edges.begin();
 }
 
-EdgesVector::const_iterator RoadGraph::edgesEnd() const
+EdgesList::const_iterator RoadGraph::edgesEnd() const
 {
   return edges.end();
 }
@@ -85,11 +68,6 @@ GeoCoords RoadGraph::maxCoords() const
   return GeoCoords(maxlat, maxlon);
 }
 
-void RoadGraph::timePassed(double secs)
-{
-  for (CarsVector::iterator i = cars.begin(); i != cars.end(); ++i)
-    i->timePassed(secs);
-}
 
 void RoadGraph::normalize()
 {
