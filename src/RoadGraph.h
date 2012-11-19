@@ -1,18 +1,18 @@
 #ifndef ROADGRAPH_H
 #define ROADGRAPH_H
 
-#include "Car.h"
+#include "Coords.h"
 
 #include <map>
 #include <vector>
 #include <memory>
 
-struct GeoCoords;
+struct MetricCoords;
 struct Edge;
 class  RoadGraph;
 
 typedef long long VertexId;
-typedef std::map<VertexId, GeoCoords> VertexMap;
+typedef std::map<VertexId, MetricCoords> VertexMap;
 typedef std::vector<Edge> EdgesVector;
 typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
 
@@ -21,15 +21,6 @@ struct Edge
   Edge(VertexId f, VertexId s);
   const VertexId f;
   const VertexId s;
-};
-
-
-struct GeoCoords
-{
-  GeoCoords();
-  GeoCoords(double lat, double lon);
-  double lat;
-  double lon;
 };
 
 enum EdgeDirection { F_TO_S, S_TO_F };

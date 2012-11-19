@@ -19,11 +19,13 @@ SOURCES += src/main.cpp\
            src/RoadGraphReader.cpp \
            src/RoadGraph.cpp \
            src/Speed.cpp \
-    src/PositionAtEdge.cpp
+           src/PositionAtEdge.cpp \
+           src/Coords.cpp
 
 HEADERS  += src/CitiInz.h \
             src/CityMapFrame.h \
             src/RoadGraphReader.h \
             src/RoadGraph.h \
             src/Speed.h \
-    src/PositionAtEdge.h
+            src/PositionAtEdge.h \
+            src/Coords.h
