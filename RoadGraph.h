@@ -15,13 +15,37 @@ typedef long long VertexId;
 typedef std::map<VertexId, GeoCoords> VertexMap;
 typedef std::vector<Edge> EdgesVector;
 typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
-typedef std::map<unsigned, Car> CarMap;
+
+class VertexManager
+{
+public:
+  virtual void addVertex(VertexId id, GeoCoords coords) = 0;
+  virtual const GeoCoords& getVertexCoords(VertexId id) const = 0;
+};
 
 struct Edge
 {
   Edge(VertexId f, VertexId s);
   const VertexId f;
   const VertexId s;
+};
+
+enum EdgeDirection { F_TO_S, S_TO_F };
+
+class PositionAtEdge
+{
+public:
+  PositionAtEdge(const Edge& edge,
+                 const VertexManager& manager,
+                 EdgeDirection direction = F_TO_S,
+                 double startingPosition);
+
+private:
+  const VertexManager& vertexManager;
+  const Edge& edge;
+  const EdgeDirection direction;
+  const double lenght;
+  double distancePassed;
 };
 
 struct GeoCoords
@@ -32,13 +56,12 @@ struct GeoCoords
   double lon;
 };
 
-class RoadGraph
+class RoadGraph : public VertexManager
 {
 public:
   RoadGraph();
   void addVertex(VertexId id, GeoCoords coords);
   void addEdge(VertexId f, VertexId s);
-  void addRandomCar();
 
   VertexMap::const_iterator vertexBegin() const;
   VertexMap::const_iterator vertexEnd() const;

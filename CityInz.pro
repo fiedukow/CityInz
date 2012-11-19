@@ -18,8 +18,10 @@ SOURCES += main.cpp\
     CityMapFrame.cpp \
     RoadGraphReader.cpp \
     RoadGraph.cpp \
+    Speed.cpp
 
 HEADERS  += CitiInz.h \
     CityMapFrame.h \
     RoadGraphReader.h \
     RoadGraph.h \
+    Speed.h
