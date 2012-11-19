@@ -40,5 +40,8 @@ RoadGraphPtr RoadGraphReader::readRoadGraph()
     inputFile >> beg >> end >> dist >> lanes >> speed;
     result->addEdge(beg, end);
   }
+
+  result->addRandomCar();
+
   return result;
 }
