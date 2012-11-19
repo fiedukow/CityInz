@@ -9,7 +9,7 @@ CityMapFrame::CityMapFrame(QWidget* parent, RoadGraphPtr graph)
 {
   time_t begin = time(NULL);
   graph->normalize();
-  //graph->scale(10000);
+  graph->scale(0.1);
   //int maxLon = graph->maxLon();
   MetricCoords maxCoords = graph->maxCoords();
   int maxY = maxCoords.y;

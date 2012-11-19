@@ -1,5 +1,6 @@
 #include "RoadGraph.h"
 #include <cstdlib>
+#include <limits>
 
 Edge::Edge(VertexId f, VertexId s)
   : f(f), s(s)
@@ -67,7 +68,8 @@ void RoadGraph::timePassed(double secs)
 
 void RoadGraph::normalize()
 {
-  double minlat = 91, minlon = 181;
+  double minlat = std::numeric_limits<double>::max();
+  double minlon = std::numeric_limits<double>::max();
   for (VertexMap::const_iterator i = vertexes.begin(); i!= vertexes.end(); ++i)
   {
     const MetricCoords& c = i->second;
