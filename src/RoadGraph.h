@@ -16,13 +16,6 @@ typedef std::map<VertexId, GeoCoords> VertexMap;
 typedef std::vector<Edge> EdgesVector;
 typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
 
-class VertexManager
-{
-public:
-  virtual void addVertex(VertexId id, GeoCoords coords) = 0;
-  virtual const GeoCoords& getVertexCoords(VertexId id) const = 0;
-};
-
 struct Edge
 {
   Edge(VertexId f, VertexId s);
@@ -30,23 +23,6 @@ struct Edge
   const VertexId s;
 };
 
-enum EdgeDirection { F_TO_S, S_TO_F };
-
-class PositionAtEdge
-{
-public:
-  PositionAtEdge(const Edge& edge,
-                 const VertexManager& manager,
-                 EdgeDirection direction = F_TO_S,
-                 double startingPosition);
-
-private:
-  const VertexManager& vertexManager;
-  const Edge& edge;
-  const EdgeDirection direction;
-  const double lenght;
-  double distancePassed;
-};
 
 struct GeoCoords
 {
@@ -54,6 +30,15 @@ struct GeoCoords
   GeoCoords(double lat, double lon);
   double lat;
   double lon;
+};
+
+enum EdgeDirection { F_TO_S, S_TO_F };
+
+class VertexManager
+{
+public:
+  virtual void addVertex(VertexId id, GeoCoords coords) = 0;
+  virtual const GeoCoords& getVertexCoords(VertexId id) const = 0;
 };
 
 class RoadGraph : public VertexManager

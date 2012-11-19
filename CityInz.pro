@@ -13,15 +13,17 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++0x
 
 
-SOURCES += main.cpp\
-        CitiInz.cpp \
-    CityMapFrame.cpp \
-    RoadGraphReader.cpp \
-    RoadGraph.cpp \
-    Speed.cpp
+SOURCES += src/main.cpp\
+           src/CitiInz.cpp \
+           src/CityMapFrame.cpp \
+           src/RoadGraphReader.cpp \
+           src/RoadGraph.cpp \
+           src/Speed.cpp \
+    src/PositionAtEdge.cpp
 
-HEADERS  += CitiInz.h \
-    CityMapFrame.h \
-    RoadGraphReader.h \
-    RoadGraph.h \
-    Speed.h
+HEADERS  += src/CitiInz.h \
+            src/CityMapFrame.h \
+            src/RoadGraphReader.h \
+            src/RoadGraph.h \
+            src/Speed.h \
+    src/PositionAtEdge.h
