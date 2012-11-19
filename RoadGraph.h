@@ -1,8 +1,6 @@
 #ifndef ROADGRAPH_H
 #define ROADGRAPH_H
 
-#include "Car.h"
-
 #include <map>
 #include <list>
 #include <memory>
@@ -15,7 +13,7 @@ typedef long long VertexId;
 typedef std::map<VertexId, GeoCoords> VertexMap;
 typedef std::list<Edge> EdgesList;
 typedef std::shared_ptr<RoadGraph> RoadGraphPtr;
-typedef std::map<unsigned, Car> CarMap;
+//typedef std::map<unsigned, Car> CarMap;
 
 struct Edge
 {
