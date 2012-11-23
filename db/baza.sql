@@ -53,8 +53,8 @@ COMMENT ON COLUMN StreetNodes.mos IS 'Meters over see where the vertex is (z)';
 CREATE TABLE Streets
 (
   streetId SERIAL,
-  firstNode serial not null,
-  secondNode serial not null,
+  firstNode integer not null,
+  secondNode integer not null,
 
   CONSTRAINT pk_IdOfStreet PRIMARY KEY(streetId),
   CONSTRAINT fk_firstNode FOREIGN KEY (firstNode) REFERENCES StreetNodes(streetNodeId),
@@ -111,7 +111,7 @@ COMMENT ON COLUMN Prism.height IS 'Height of Prism in meters (max. 999.99).';
 
 CREATE TABLE PrismVertex
 (
-  prismId serial,
+  prismId integer not null,
   orderPos numeric(5),
   lon longitude not null,
   lat latitude not null,
@@ -139,7 +139,7 @@ CREATE TABLE Observations
   lon longitude not null,
   lat latitude not null,
   mos metersOverSee not null DEFAULT 0,
-  sensorId serial not null,
+  sensorId integer not null,
   
   CONSTRAINT pk_idOfObservation PRIMARY KEY(observationId),
   CONSTRAINT fk_idOfSensor FOREIGN KEY (sensorId) REFERENCES Sensors(sensorId) 
