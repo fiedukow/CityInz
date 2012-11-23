@@ -1,4 +1,4 @@
---Dodane typy do bazy danych
+--Typy dodane do bazy danych
 --==========================
 BEGIN;
 
@@ -39,9 +39,10 @@ CREATE TABLE Observations
   lon longitude not null,
   lat latitude not null,
   mos metersOverSee not null DEFAULT 0,
-  --FOREIGN KEY NR_KAMERY
+  sensorId serial not null,
   
-  CONSTRAINT pk_idOfObservation PRIMARY KEY(observationId)
+  CONSTRAINT pk_idOfObservation PRIMARY KEY(observationId),
+  CONSTRAINT fk_idOfSensor FOREIGN KEY (sensorId) REFERENCES Sensors(sensorId) 
 );
 
 
