@@ -94,7 +94,7 @@ COMMENT ON COLUMN Sensors.rotVer IS 'Vertical rotation of sensor. 0 is horizonta
 COMMENT ON COLUMN Sensors.rotHor IS 'Horizontal rotation of sensor. 0 is North. 90 is East.';
 COMMENT ON COLUMN Sensors.fov IS 'Field of view. Angle in which sensor can see sth.';
 
-CREATE TABLE Prism
+CREATE TABLE Prisms
 (
   prismId SERIAL,
   mosDown metersOverSee not null DEFAULT 0,
@@ -104,12 +104,12 @@ CREATE TABLE Prism
   CONSTRAINT ck_height CHECK (height > 0)
 );
 
-COMMENT ON TABLE Prism IS 'Contains descriptions of Prisms';
-COMMENT ON COLUMN Prism.prismId IS 'Identifier of prism used in other tables';
-COMMENT ON COLUMN Prism.mosDown IS 'Position of bottom wall of the Prism in axis';
-COMMENT ON COLUMN Prism.height IS 'Height of Prism in meters (max. 999.99).';
+COMMENT ON TABLE Prisms IS 'Contains descriptions of Prisms';
+COMMENT ON COLUMN Prisms.prismId IS 'Identifier of prism used in other tables';
+COMMENT ON COLUMN Prisms.mosDown IS 'Position of bottom wall of the Prism in axis';
+COMMENT ON COLUMN Prisms.height IS 'Height of Prism in meters (max. 999.99).';
 
-CREATE TABLE PrismVertex
+CREATE TABLE PrismVertexes
 (
   prismId integer not null,
   orderPos numeric(5),
@@ -117,14 +117,14 @@ CREATE TABLE PrismVertex
   lat latitude not null,
   
   CONSTRAINT pk_IdPrismVertex PRIMARY KEY(prismId, orderPos),
-  CONSTRAINT fk_prismId FOREIGN KEY (prismId) REFERENCES Prism(prismId)
+  CONSTRAINT fk_prismId FOREIGN KEY (prismId) REFERENCES Prisms(prismId)
 );
 
-COMMENT ON TABLE PrismVertex IS 'Contains informations about prisms vertexes';
-COMMENT ON COLUMN PrismVertex.prismId IS 'Id of prism that vertex belongs to';
-COMMENT ON COLUMN PrismVertex.orderPos IS 'Which in order is the vertex for this base polygon';
-COMMENT ON COLUMN PrismVertex.lon IS 'Longitude of this vertex';
-COMMENT ON COLUMN PrismVertex.lat IS 'Latitude of this vertex';
+COMMENT ON TABLE PrismVertexes IS 'Contains informations about prisms vertexes';
+COMMENT ON COLUMN PrismVertexes.prismId IS 'Id of prism that vertex belongs to';
+COMMENT ON COLUMN PrismVertexes.orderPos IS 'Which in order is the vertex for this base polygon';
+COMMENT ON COLUMN PrismVertexes.lon IS 'Longitude of this vertex';
+COMMENT ON COLUMN PrismVertexes.lat IS 'Latitude of this vertex';
 
 
 
